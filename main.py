@@ -25,7 +25,7 @@ class calculadora():
 
 
     def mostrar_resultado(self,res):
-        print("Resultado: ", res, "\n")
+        print("\nResultado: ", round(res,2), "\n")
 
 
     def suma(self):
