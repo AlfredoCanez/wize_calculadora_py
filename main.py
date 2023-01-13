@@ -17,11 +17,35 @@ class calculadora():
 
     def capturar_numeros(self,opcion):
 
+        validarA = True
+        validarB = True
+
         if opcion != 7 and opcion != 8 and opcion != 9:
-            self.numeros[0] = float(input("Ingresa el primer numero: "))
-            self.numeros[1] = float(input("Ingresa el segundo numero: "))
+            
+            while validarA:
+                try:
+                    self.numeros[0] = float(input("Ingrese A: "))
+                except ValueError:
+                    print("Ingrese número valido\n")
+                    continue
+                validarA = False
+
+            while validarB:
+                try:
+                    self.numeros[1] = float(input("Ingrese B: "))
+                except ValueError:
+                    print("Ingrese número valido\n")
+                    continue 
+
+                validarB = False 
         else:
-            self.numeros[0] = float(input("Ingresa el numero: "))
+            while validarA:
+                try:
+                    self.numeros[0] = float(input("Ingrese A: "))
+                except ValueError:
+                    print("Ingrese número valido\n")
+                    continue
+                validarA = False
 
 
     def mostrar_resultado(self,res):
@@ -48,7 +72,10 @@ class calculadora():
 
 
     def raiz(self):
-        return self.numeros[0] ** (1/self.numeros[1])
+        if self.numeros[1] == 0:
+            raise ValueError("No es posible la division entre 0")
+        else:
+            return self.numeros[0] ** (1/self.numeros[1])
 
 
     def potencia(self):
@@ -70,15 +97,15 @@ class calculadora():
     def menu(self):
         print("""
                 Seleccione una opción:
-                    1 Sumar
-                    2 Restar
-                    3 Multiplicar
-                    4 Dividir
-                    5 Raiz n
-                    6 Exponente n
-                    7 Seno
-                    8 Coseno
-                    9 Tangente
+                    1 Sumar A + B
+                    2 Restar A - B
+                    3 Multiplicar A * B
+                    4 Dividir A / B
+                    5 Raiz B de A
+                    6 Exponente A ^ B
+                    7 Seno(A)
+                    8 Coseno(A)
+                    9 Tangente(A)
                     10 Salir
                 """)
 
@@ -90,11 +117,14 @@ def main():
     while calc.estado():
 
         calc.menu()
-        opcion = int(input())
+        try:
+            opcion = int(input())
+        except ValueError:
+            continue
 
         if opcion == 10:
             calc.apagar()
-        elif opcion > 0 and opcion < 9:
+        elif opcion > 0 and opcion < 10:
             calc.capturar_numeros(opcion)
 
             if opcion == 1:
