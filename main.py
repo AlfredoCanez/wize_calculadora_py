@@ -118,7 +118,7 @@ def main():
 
         calc.menu()
         try:
-            opcion = int(input())
+            opcion = int(input("Ingrese opción: "))
         except ValueError:
             continue
 
